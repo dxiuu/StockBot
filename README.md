@@ -1,7 +1,5 @@
 # StockBot
 
-HELLOOOOOO
-
 The StockBot is the inaugural open source project by [Artificial Intelligence @ UCI](https://aiclub.ics.uci.edu), a student-run organization
 affiliated with the Donald Bren School of Information and Computer Sciences at the University of California, Irvine.
 
