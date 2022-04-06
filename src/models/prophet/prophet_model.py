@@ -7,7 +7,8 @@ from fbprophet.plot import plot_plotly
 from plotly import graph_objs as go
 
 # model
-m = Prophet()
-m.fit(df_train)
-future = m.make_future_dataframe(periods=period)
-forecast = m.predict(future)
+def prophetModel(period: int):
+    m = Prophet()
+    m.fit(df_train)
+    future = m.make_future_dataframe(periods=period)
+    forecast = m.predict(future)
