@@ -1,5 +1,9 @@
 import streamlit as st
 
+#page configuration
+
+#navigation ui
+
 #define containers
 intro = st.container()
 inp = st.container()
