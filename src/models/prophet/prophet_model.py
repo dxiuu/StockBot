@@ -40,4 +40,4 @@ class ProphetModel:
         st.write(fig2)
 
     def change_start(self, new_start):
-        self.START = new_start
+        self._START = new_start
