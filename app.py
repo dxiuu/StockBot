@@ -1,9 +1,6 @@
 import streamlit as st
 
-
-st.title("StockBot")
-
-
+#define containers
 intro = st.container()
 inp = st.container()
 
@@ -13,3 +10,5 @@ with intro:
 
 with inp:
     inp = st.text_input("Enter ticker:")
+
+#move ui elements from prophet_model.py into app.py
