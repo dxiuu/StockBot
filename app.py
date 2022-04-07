@@ -2,6 +2,14 @@ import streamlit as st
 
 
 st.title("StockBot")
-st.subheader("Personal dashboardf for forecasting your most interesting choices")
-inp = st.text_input("Enter ticker:")
 
+
+intro = st.container()
+inp = st.container()
+
+with intro:
+    st.title("StockBot")
+    st.subheader("Forecasting your stocks with Prophet")
+
+with inp:
+    inp = st.text_input("Enter ticker:")
