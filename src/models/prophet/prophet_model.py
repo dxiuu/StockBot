@@ -9,33 +9,44 @@ import pandas
 
 
 class ProphetModel:
-    def __init__(self, df, period, start):
+    def __init__(self, df=None, period=None, start="2015-01-01"):
         self._df = df
         self._period = period
         self._START = start
         self._forecast = None
+        self._model = None
 
     def get_data(self, ticker):
-            TODAY = date.today().strftime("%Y-%m-%d")
-            data = yf.download(ticker, self.START, TODAY)
-            data.reset_index(inplace=True)
-            return data
+        TODAY = date.today().strftime("%Y-%m-%d")
+        data = yf.download(ticker, self._START, TODAY)
+        data.reset_index(inplace=True)
+        return data
+    
+    def set_period(self, n_years):
+        self._period = n_years * 365
+    
+    def create_dataframe(self, data):
+        df_t = data[['Date', 'Close']]
+        df_t = df_t.rename(columns={'Date': 'ds', 'Close': 'y'})
+        self._df = df_t        
 
     def predict(self):
-        m = Prophet()
-        m.fit(self._df)
-        future = m.make_future_dataframe(periods=self._period)
-        self._forecast = m.predict(future)
+        self._model = Prophet()
+        self._model.fit(self._df)
+        future = self._model.make_future_dataframe(periods=self._period)
+        self._forecast = self._model.predict(future)
+        return self._forecast
 
     def plot_pred(self, model, n_years):
         st.subheader('Forecast data')
         st.write(self._forecast.tail())
             
-        st.write(f'Forecast plot for {n_years} years')
+        st.subheader(f'Forecast plot over {n_years} years')
         fig1 = plot_plotly(model, self._forecast)
         st.plotly_chart(fig1)
 
-        st.write("Forecast components")
+        st.subheader("Forecast components")
+        st.write('Trend and seasonality')
         fig2 = model.plot_components(self._forecast)
         st.write(fig2)
 
